@@ -27,7 +27,7 @@ public class Physician extends User implements HIPAACompliantUser {
 	}
 
 	public boolean accessAuthorized(Integer confirmedAuthID) {
-		if (this.id != this.pin) {
+		if (this.id != confirmedAuthID) {
 			return false;
 		}
 		return true;

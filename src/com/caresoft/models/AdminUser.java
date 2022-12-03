@@ -34,14 +34,14 @@ public class AdminUser extends User implements HIPAACompliantUser, HIPAAComplian
     public void authIncident() {
         String report = String.format(
             "Datetime Submitted: %s \n,  ID: %s\n Notes: %s \n", 
-            new Date(), this.id, "AUTHORIZATION ATTEMPT FAILED FOR THIS USER"
+            new Date(), this.employeeID, "AUTHORIZATION ATTEMPT FAILED FOR THIS USER"
         );
         securityIncidents.add(report);
     }
     
 	public ArrayList<String> reportSecurityIncidents() {
 
-		return securityIncidents;
+		return this.securityIncidents;
 	}
 
 	public boolean assignPin(int pin) {
@@ -53,8 +53,8 @@ public class AdminUser extends User implements HIPAACompliantUser, HIPAAComplian
 		return true;
 	}
 
-	public boolean accessAuthorized(int pin) {
-		if (this.pin != pin) {
+	public boolean accessAuthorized(int confirmedAuthID) {
+		if (this.employeeID != confirmedAuthID) {
 			this.authIncident();
 			return false;
 		}
